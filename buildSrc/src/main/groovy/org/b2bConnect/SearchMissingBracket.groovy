@@ -1,6 +1,6 @@
 package org.b2bConnect
 
-class SearchAndPasteLostBracket {
+class SearchMissingBracket {
     static void main(String[] args) {
         println searchLostBracketIndex("vite.config.ts")
     }
