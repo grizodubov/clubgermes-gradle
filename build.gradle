@@ -18,3 +18,63 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.register('execGitPull', Exec) {
+    group = 'tauriConf'
+    commandLine "git", "pull", "origin", "master"
+}
+
+import org.b2bConnect.PackageJsonToMobileUpgrade
+
+tasks.register('runPackageJsonToMobileUpgrade') {
+    group = 'tauriConf'
+    PackageJsonToMobileUpgrade.main()
+}
+
+tasks.register('installPackageJsonDependencies', Exec) {
+    group = 'tauriConf'
+    dependsOn runPackageJsonToMobileUpgrade
+    commandLine "npm", "install"
+}
+
+tasks.register('rustUpdate', Exec) {
+    group = 'tauriConf'
+    commandLine "rust", "update"
+}
+
+tasks.register('tauriAppUpdate', Exec) {
+    group = 'tauriConf'
+    enabled = false // already exists in package.json
+    commandLine "npm", "install", "@tauri-apps/api@next"
+}
+
+tasks.register('tauriCliUpdate', Exec) {
+    group = 'tauriConf'
+    commandLine "cargo", "install", "tauri-cli", "--version", "^2.0.0-alpha"
+}
+
+import org.b2bConnect.CargoDependenciesUpdateToml
+
+tasks.register('runCargoDependenciesUpdate') {
+    group = 'tauriConf'
+    CargoDependenciesUpdateToml.main()
+}
+
+import org.b2bConnect.SearchAndPasteViteConfigTs
+
+tasks.register('runSearchAndPasteTextImport1') {
+    group = 'tauriConf'
+
+    SearchAndPasteViteConfigTs.main()
+}
+
+tasks.register('installNpmPackageInternalIp', Exec) {
+    group = 'tauriConf'
+    commandLine "npm", "install", "--save-dev", "internal-ip"
+}
+
+tasks.register('copyFilesTauriMobile', Copy) {
+    group = 'tauriConf'
+    from "$projectDir/buildSrc/src/main/filesTauriMobile"
+    into "$projectDir"
+}

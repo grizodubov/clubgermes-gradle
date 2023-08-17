@@ -1,0 +1,21 @@
+plugins {
+    id 'groovy'
+}
+
+group = 'ru.b2bConnect'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree('/usr/local/opt/groovy/libexec/lib') {
+        include 'groovy-toml-4.0.13.jar'
+        include 'jackson-annotations-2.15.2.jar'
+        include 'jackson-core-2.15.2.jar'
+        include 'jackson-databind-2.15.2.jar'
+        include 'jackson-dataformat-toml-2.15.2.jar'
+
+    }
+}
