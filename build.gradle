@@ -64,7 +64,6 @@ import org.b2bConnect.SearchAndPasteViteConfigTs
 
 tasks.register('runSearchAndPasteTextImport1') {
     group = 'tauriConf'
-
     SearchAndPasteViteConfigTs.main()
 }
 

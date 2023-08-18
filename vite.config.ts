@@ -2,9 +2,14 @@ import * as path from 'path';
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import sveltePreprocess from "svelte-preprocess";
+import { internalIpV4 } from 'internal-ip';
+
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(async () => {
+  const host = await internalIpV4()
+
+  return {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -26,6 +31,12 @@ export default defineConfig({
   clearScreen: false,
   // tauri expects a fixed port, fail if that port is not available
   server: {
+      host: '0.0.0.0', // listen on all addresses
+      hmr: {
+        protocol: 'ws',
+        host,
+        port: 1420,
+      },
     port: 1420,
     strictPort: true,
   },
