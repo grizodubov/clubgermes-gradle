@@ -42,6 +42,9 @@ tasks.register('rustUpdate', Exec) {
     commandLine "rust", "update"
 }
 
+//________________________________________________________________
+//-------------------Tauri mobile configuration-------------------
+//----------------------------------------------------------------
 tasks.register('tauriAppUpdate', Exec) {
     group = 'tauriConf'
     enabled = false // already exists in package.json
@@ -60,17 +63,30 @@ tasks.register('runCargoDependenciesUpdate') {
     CargoDependenciesUpdateToml.main()
 }
 
-import org.b2bConnect.SearchAndPasteViteConfigTs
-
-tasks.register('runSearchAndPasteTextImport1') {
-    group = 'tauriConf'
-    SearchAndPasteViteConfigTs.main()
-}
-
 tasks.register('installNpmPackageInternalIp', Exec) {
     group = 'tauriConf'
     commandLine "npm", "install", "--save-dev", "internal-ip"
 }
+
+
+//________________________________________________________________
+//-----------------Vite, Cargo, Libs, Tauri.conf------------------
+//----------------------------------------------------------------
+import org.b2bConnect.SearchAndPasteViteConfigTs
+
+tasks.register('runSearchAndPasteViteConfigTs') {
+    group = 'tauriConf'
+    dependsOn installNpmPackageInternalIp
+    SearchAndPasteViteConfigTs.main()
+}
+
+
+//tasks.register('runSearchMissingBracket') {
+//    group = 'tauriConf'
+//    dependsOn runSearchAndPasteViteConfigTs
+//    SearchMissingBracket("vite.config.ts")
+//}
+
 
 tasks.register('copyFilesTauriMobile', Copy) {
     group = 'tauriConf'

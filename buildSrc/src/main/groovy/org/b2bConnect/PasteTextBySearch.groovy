@@ -1,31 +1,16 @@
 package org.b2bConnect
 
-class SearchAndPasteTextImport {
+class PasteTextBySearch {
     static void main(SearchAndPasteTextObject a) {
 
         def newString = insertStringInIndexPlace(a.elementOfLastOccurToSearch, a.textToAdd, a.fileToSearchName, a.startFromEndOfString)
         if (newString.length() > 0) {
-            wrightToFileFunction(a.fileToPasteName, newString)
+            WrightToFileFunc.main(a.fileToPasteName, newString)
         }
     }
 
-    static inputFilePath(fileName) {
-        def path = new ProjectDirUriGet().ProjectDirUri()
-        def fileJson = "${path}$fileName"
-
-        return fileJson
-    }
-
-    static inputFileText(fileToSearchName) {
-        def fileJson = inputFilePath(fileToSearchName)
-        def inputFile = new File("$fileJson")
-        def arrayToSearch = inputFile.text
-
-        return arrayToSearch
-    }
-
     static searchLastOccurIndex(elementOfLastOccurToSearch, fileToSearchName, startFromEndOfString) {
-        def arrayToSearch = inputFileText(fileToSearchName)
+        def arrayToSearch = new InputFileTextGet().inputFileText(fileToSearchName)
         def indexOfLastOccurIndex = arrayToSearch.lastIndexOf("$elementOfLastOccurToSearch")
         def indexOfLastOccurIndexEndOfString = arrayToSearch.indexOf("\n", indexOfLastOccurIndex)
         if (startFromEndOfString) {
@@ -39,9 +24,10 @@ class SearchAndPasteTextImport {
 
     static insertStringInIndexPlace(elementOfLastOccurToSearch, textToAdd, fileToSearchName, startFromEndOfString) {
         def indexOfLastOccurIndexEndOfString = searchLastOccurIndex(elementOfLastOccurToSearch, fileToSearchName, startFromEndOfString)
-        StringBuilder sb = new StringBuilder(inputFileText(fileToSearchName))
-        if (!sb.contains(textToAdd)) {
-            sb.insert(indexOfLastOccurIndexEndOfString, textToAdd) // to new line
+        def inputFileText = new InputFileTextGet().inputFileText(fileToSearchName)
+        StringBuilder sb = new StringBuilder(inputFileText)
+        if (!sb.contains(textToAdd as String)) {
+            sb.insert(indexOfLastOccurIndexEndOfString as int, textToAdd as String) // to new line
             def newString = sb.toString()
 
             return newString
@@ -50,11 +36,5 @@ class SearchAndPasteTextImport {
 
             return ""
         }
-    }
-
-    static wrightToFileFunction(fileToPasteName, newString) {
-        def inputFilePath = inputFilePath(fileToPasteName)
-        def inputFile = new File("$inputFilePath")
-        inputFile.write(newString)
     }
 }

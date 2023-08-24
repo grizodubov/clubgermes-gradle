@@ -11,7 +11,7 @@ class SearchAndPasteViteConfigTs {
         SearchAndPasteTextObjectOne.fileToPasteName = "vite.config.ts"
         SearchAndPasteTextObjectOne.startFromEndOfString = true
 
-        SearchAndPasteTextImport.main(SearchAndPasteTextObjectOne)
+        PasteTextBySearch.main(SearchAndPasteTextObjectOne)
 //----------------------------------------------------------------
         def SearchAndPasteTextObjectTwo = new SearchAndPasteTextObject()
 
@@ -21,7 +21,7 @@ class SearchAndPasteViteConfigTs {
         SearchAndPasteTextObjectTwo.fileToPasteName = "vite.config.ts"
         SearchAndPasteTextObjectTwo.startFromEndOfString = false
 
-        SearchAndPasteTextImport.main(SearchAndPasteTextObjectTwo)
+        PasteTextBySearch.main(SearchAndPasteTextObjectTwo)
 //----------------------------------------------------------------
         def SearchAndPasteTextObjectThree = new SearchAndPasteTextObject()
 
@@ -31,7 +31,7 @@ class SearchAndPasteViteConfigTs {
         SearchAndPasteTextObjectThree.fileToPasteName = "vite.config.ts"
         SearchAndPasteTextObjectThree.startFromEndOfString = true
 
-        SearchAndPasteTextImport.main(SearchAndPasteTextObjectThree)
+        PasteTextBySearch.main(SearchAndPasteTextObjectThree)
 //----------------------------------------------------------------
         def SearchAndPasteTextObjectFour = new SearchAndPasteTextObject()
 
@@ -41,6 +41,13 @@ class SearchAndPasteViteConfigTs {
         SearchAndPasteTextObjectFour.fileToPasteName = "vite.config.ts"
         SearchAndPasteTextObjectFour.startFromEndOfString = true
 
-        SearchAndPasteTextImport.main(SearchAndPasteTextObjectFour)
+        PasteTextBySearch.main(SearchAndPasteTextObjectFour)
+//----------------------------------------------------------------
+        println SearchMissingBracket.searchLostBracketIndex("vite.config.ts")[0].toString().contains("Close curly brackets are missing:")
+        if (SearchMissingBracket.searchLostBracketIndex("vite.config.ts")[0].toString().contains("Close curly brackets are missing:") ) {
+            println "HELLO!"
+            def indexWhereToPaste = new SearchMissingBracket().searchLostBracketIndex("vite.config.ts")[1]
+            PasteTextByIndex.main("vite.config.ts", ' }', indexWhereToPaste, true)
+        }
     }
 }

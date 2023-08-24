@@ -22,6 +22,7 @@
         "@types/node": "^18.7.10",
         "autoprefixer": "^10.4.14",
         "flowbite-svelte": "^0.34.1",
+        "internal-ip": "^8.0.0",
         "postcss": "^8.4.21",
         "sass": "^1.59.3",
         "svelte": "^3.54.0",

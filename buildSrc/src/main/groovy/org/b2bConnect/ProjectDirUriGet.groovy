@@ -8,7 +8,6 @@ import java.nio.file.Paths
 class ProjectDirUriGet {
     static main(String[] args) {
 
-
     }
 
     static ProjectDirUri() {
