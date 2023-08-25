@@ -22,6 +22,6 @@ class CargoDependenciesUpdateToml {
         }
         def builder = new TomlBuilder()
         builder slurped
-        new File("$targetDir").withWriter("UTF-8") { w -> builder.writeTo(w) }
+        new File("$targetDir/Cargo.toml").withWriter("UTF-8") { w -> builder.writeTo(w) }
     }
 }

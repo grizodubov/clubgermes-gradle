@@ -3,36 +3,39 @@ package org.b2bConnect
 class PasteTextBySearch {
     static void main(SearchAndPasteTextObject a) {
 
-        def newString = insertStringInIndexPlace(a.elementOfLastOccurToSearch, a.textToAdd, a.fileToSearchName, a.startFromEndOfString)
+        def newString = insertStringInIndexPlace(a)
         if (newString.length() > 0) {
             WrightToFileFunc.main(a.fileToPasteName, newString)
         }
     }
 
-    static searchLastOccurIndex(elementOfLastOccurToSearch, fileToSearchName, startFromEndOfString) {
-        def arrayToSearch = new InputFileTextGet().inputFileText(fileToSearchName)
-        def indexOfLastOccurIndex = arrayToSearch.lastIndexOf("$elementOfLastOccurToSearch")
+    static searchLastOccurIndex(a) {
+        def arrayToSearch = new InputFileTextGet().inputFileText(a.fileToSearchName)
+        def indexOfLastOccurIndex = arrayToSearch.lastIndexOf("$a.elementOfLastOccurToSearch")
         def indexOfLastOccurIndexEndOfString = arrayToSearch.indexOf("\n", indexOfLastOccurIndex)
-        if (startFromEndOfString) {
+        if (a.startFromEndOfString) {
 
             return indexOfLastOccurIndexEndOfString
         } else {
 
-            return indexOfLastOccurIndex + elementOfLastOccurToSearch.length()
+            return indexOfLastOccurIndex + a.elementOfLastOccurToSearch.length()
         }
     }
 
-    static insertStringInIndexPlace(elementOfLastOccurToSearch, textToAdd, fileToSearchName, startFromEndOfString) {
-        def indexOfLastOccurIndexEndOfString = searchLastOccurIndex(elementOfLastOccurToSearch, fileToSearchName, startFromEndOfString)
-        def inputFileText = new InputFileTextGet().inputFileText(fileToSearchName)
+    static insertStringInIndexPlace(a) {
+        def indexOfLastOccurIndexEndOfString = searchLastOccurIndex(a)
+        def inputFileText = new InputFileTextGet().inputFileText(a.fileToSearchName)
         StringBuilder sb = new StringBuilder(inputFileText)
-        if (!sb.contains(textToAdd as String)) {
-            sb.insert(indexOfLastOccurIndexEndOfString as int, textToAdd as String) // to new line
+        if (!sb.contains(a.textToAdd as String)) {
+            sb.insert(indexOfLastOccurIndexEndOfString as int, a.textToAdd as String) // to new line
+            if (a.startFromNewString) {
+                sb.insert(indexOfLastOccurIndexEndOfString as int, "\n" as String)
+            }
             def newString = sb.toString()
 
             return newString
         } else {
-            println "$textToAdd\n---------------already exists---------------"
+            println "$a.textToAdd\n---------------already exists---------------"
 
             return ""
         }

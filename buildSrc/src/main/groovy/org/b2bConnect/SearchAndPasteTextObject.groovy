@@ -12,8 +12,9 @@ class SearchAndPasteTextObject {
     String fileToSearchName
     String fileToPasteName
     Boolean startFromEndOfString
+    Boolean startFromNewString
 
     def getAt(Integer index) {
-        index == 0 ? elementOfLastOccurToSearch : index == 1 ? textToAdd : index == 2 ? fileToSearchName : index == 3 ? fileToPasteName : index == 4 ? startFromEndOfString : '--'
+        index == 0 ? elementOfLastOccurToSearch : index == 1 ? textToAdd : index == 2 ? fileToSearchName : index == 3 ? fileToPasteName : index == 4 ? startFromEndOfString : index == 5 ? startFromNewString : '--'
     }
 }

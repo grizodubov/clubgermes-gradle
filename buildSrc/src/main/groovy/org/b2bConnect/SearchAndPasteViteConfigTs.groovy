@@ -3,51 +3,62 @@ package org.b2bConnect
 class SearchAndPasteViteConfigTs {
     static void main(String[] args) {
 
-        def SearchAndPasteTextObjectOne = new SearchAndPasteTextObject()
+        def One = new SearchAndPasteTextObject()
 
-        SearchAndPasteTextObjectOne.elementOfLastOccurToSearch = "import "
-        SearchAndPasteTextObjectOne.textToAdd = "\nimport { internalIpV4 } from 'internal-ip';\n" as String
-        SearchAndPasteTextObjectOne.fileToSearchName = "vite.config.ts"
-        SearchAndPasteTextObjectOne.fileToPasteName = "vite.config.ts"
-        SearchAndPasteTextObjectOne.startFromEndOfString = true
+        One.elementOfLastOccurToSearch = "import "
+        One.textToAdd = "import { internalIpV4 } from 'internal-ip'\n" as String
+        One.fileToSearchName = "vite.config.ts"
+        One.fileToPasteName = "vite.config.ts"
+        One.startFromEndOfString = true
+        One.startFromNewString = true
 
-        PasteTextBySearch.main(SearchAndPasteTextObjectOne)
+        PasteTextBySearch.main(One)
 //----------------------------------------------------------------
-        def SearchAndPasteTextObjectTwo = new SearchAndPasteTextObject()
+        def Two = new SearchAndPasteTextObject()
 
-        SearchAndPasteTextObjectTwo.elementOfLastOccurToSearch = "export default defineConfig("
-        SearchAndPasteTextObjectTwo.textToAdd = "async () => " as String
-        SearchAndPasteTextObjectTwo.fileToSearchName = "vite.config.ts"
-        SearchAndPasteTextObjectTwo.fileToPasteName = "vite.config.ts"
-        SearchAndPasteTextObjectTwo.startFromEndOfString = false
+        Two.elementOfLastOccurToSearch = "export default defineConfig("
+        Two.textToAdd = "async () => " as String
+        Two.fileToSearchName = "vite.config.ts"
+        Two.fileToPasteName = "vite.config.ts"
+        Two.startFromEndOfString = false
+        Two.startFromNewString = false
 
-        PasteTextBySearch.main(SearchAndPasteTextObjectTwo)
+        PasteTextBySearch.main(Two)
 //----------------------------------------------------------------
-        def SearchAndPasteTextObjectThree = new SearchAndPasteTextObject()
+        def Three = new SearchAndPasteTextObject()
 
-        SearchAndPasteTextObjectThree.elementOfLastOccurToSearch = "export default defineConfig(async () => {"
-        SearchAndPasteTextObjectThree.textToAdd = "\n  const host = await internalIpV4()\n\n  return {" as String
-        SearchAndPasteTextObjectThree.fileToSearchName = "vite.config.ts"
-        SearchAndPasteTextObjectThree.fileToPasteName = "vite.config.ts"
-        SearchAndPasteTextObjectThree.startFromEndOfString = true
+        Three.elementOfLastOccurToSearch = "export default defineConfig(async () => {"
+        Three.textToAdd = "  const host = await internalIpV4()\n\n  return {" as String
+        Three.fileToSearchName = "vite.config.ts"
+        Three.fileToPasteName = "vite.config.ts"
+        Three.startFromEndOfString = true
+        Three.startFromNewString = true
 
-        PasteTextBySearch.main(SearchAndPasteTextObjectThree)
+        PasteTextBySearch.main(Three)
 //----------------------------------------------------------------
-        def SearchAndPasteTextObjectFour = new SearchAndPasteTextObject()
+        def Four = new SearchAndPasteTextObject()
 
-        SearchAndPasteTextObjectFour.elementOfLastOccurToSearch = "server: {"
-        SearchAndPasteTextObjectFour.textToAdd = "\n      host: '0.0.0.0', // listen on all addresses\n      hmr: {\n        protocol: 'ws',\n        host,\n        port: 1420,\n      }," as String
-        SearchAndPasteTextObjectFour.fileToSearchName = "vite.config.ts"
-        SearchAndPasteTextObjectFour.fileToPasteName = "vite.config.ts"
-        SearchAndPasteTextObjectFour.startFromEndOfString = true
+        Four.elementOfLastOccurToSearch = "server: {"
+        Four.textToAdd = "      host: '0.0.0.0', // listen on all addresses\n      hmr: {\n        protocol: 'ws',\n        host,\n        port: 1420,\n      }," as String
+        Four.fileToSearchName = "vite.config.ts"
+        Four.fileToPasteName = "vite.config.ts"
+        Four.startFromEndOfString = true
+        Four.startFromNewString = true
 
-        PasteTextBySearch.main(SearchAndPasteTextObjectFour)
-//----------------------------------------------------------------
-        println SearchMissingBracket.searchLostBracketIndex("vite.config.ts")[0].toString().contains("Close curly brackets are missing:")
+        PasteTextBySearch.main(Four)
+//----------------------Closing bracket---------------------------
+        def Five = new SearchAndPasteTextObject()
+
+        Five.elementOfLastOccurToSearch = ""
+        Five.textToAdd = "}\n" as String
+        Five.fileToSearchName = "vite.config.ts"
+        Five.fileToPasteName = "vite.config.ts"
+        Five.startFromEndOfString = false
+        Five.startFromNewString = false
+
         if (SearchMissingBracket.searchLostBracketIndex("vite.config.ts")[0].toString().contains("Close curly brackets are missing:") ) {
-            println "HELLO!"
             def indexWhereToPaste = new SearchMissingBracket().searchLostBracketIndex("vite.config.ts")[1]
-            PasteTextByIndex.main("vite.config.ts", ' }', indexWhereToPaste, true)
+            PasteTextByIndex.main(Five, indexWhereToPaste)
         }
     }
 }

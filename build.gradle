@@ -70,7 +70,7 @@ tasks.register('installNpmPackageInternalIp', Exec) {
 
 
 //________________________________________________________________
-//-----------------Vite, Cargo, Libs, Tauri.conf------------------
+//----------------Vite.config, Tauri.conf, Libs-------------------
 //----------------------------------------------------------------
 import org.b2bConnect.SearchAndPasteViteConfigTs
 

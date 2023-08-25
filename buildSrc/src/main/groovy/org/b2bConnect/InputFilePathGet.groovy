@@ -2,7 +2,7 @@ package org.b2bConnect
 
 class InputFilePathGet {
     static void main(String[] args) {
-        inputFilePath("vite.config.ts")
+
     }
 
     static inputFilePath(fileName) {
