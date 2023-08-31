@@ -24,11 +24,11 @@ tasks.register('execGitPull', Exec) {
     commandLine "git", "pull", "origin", "master"
 }
 
-import org.b2bConnect.PackageJsonToMobileUpgrade
+import org.b2bConnect.UpgradeConfigPackageJson
 
-tasks.register('runPackageJsonToMobileUpgrade') {
+tasks.register('runUpgradeConfigPackageJson') {
     group = 'tauriConf'
-    PackageJsonToMobileUpgrade.main()
+    UpgradeConfigPackageJson.main()
 }
 
 tasks.register('installPackageJsonDependencies', Exec) {
@@ -70,7 +70,7 @@ tasks.register('installNpmPackageInternalIp', Exec) {
 
 
 //________________________________________________________________
-//----------------Vite.config, Tauri.conf, Libs-------------------
+//-------------Vite.config, Tauri.conf, Rust Libs-----------------
 //----------------------------------------------------------------
 import org.b2bConnect.SearchAndPasteViteConfigTs
 
@@ -81,15 +81,10 @@ tasks.register('runSearchAndPasteViteConfigTs') {
 }
 
 
-//tasks.register('runSearchMissingBracket') {
-//    group = 'tauriConf'
-//    dependsOn runSearchAndPasteViteConfigTs
-//    SearchMissingBracket("vite.config.ts")
-//}
 
+import org.b2bConnect.RustLibrarySouceCodeCraate
 
-tasks.register('copyFilesTauriMobile', Copy) {
+tasks.register('runRustLibrarySouceCodeCraate') {
     group = 'tauriConf'
-    from "$projectDir/buildSrc/src/main/filesTauriMobile"
-    into "$projectDir"
+    RustLibrarySouceCodeCraate.main()
 }

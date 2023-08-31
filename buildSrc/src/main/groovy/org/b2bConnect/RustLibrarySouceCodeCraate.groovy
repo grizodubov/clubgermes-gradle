@@ -65,9 +65,10 @@ fn main() {
 }
 '''
         def projectDirPath = new ProjectDirUriGet().ProjectDirUri()
-        def newFile = new File("$projectDirPath/src-tauri/src/lib.rs")
-        PasteTextByIndex.main("src-tauri/src/lib.rs", "$libRsFileText", 0, false)
-        PasteTextByIndex.main("src-tauri/src/main.rs", "$mainRssFileText", 0, false)
-        PasteTextByIndex.main("src-tauri/src/mobile.rs", "$mobileRsFileText", 0, false)
+        new File("dist").mkdir()
+        new File("$projectDirPath/src-tauri/src").mkdir()
+        new File("$projectDirPath/src-tauri/src/lib.rs").withWriter {writer -> writer.write(libRsFileText)}
+        new File("$projectDirPath/src-tauri/src/main.rs").withWriter {writer -> writer.write(mainRssFileText)}
+        new File("$projectDirPath/src-tauri/src/mobile.rs").withWriter {writer -> writer.write(mobileRsFileText)}
     }
 }
