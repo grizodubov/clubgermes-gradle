@@ -1,7 +1,7 @@
 package org.b2bConnect
 
 class PasteTextByIndex {
-    static void main(SearchAndPasteTextObject a, indexWhereToPaste) {
+    static void main(PasteTextObject a, indexWhereToPaste) {
 
         def newString = insertStringInIndexPlace(a.fileToPasteName, a.textToAdd, a.startFromNewString, indexWhereToPaste)
         if (newString.length() > 0) {

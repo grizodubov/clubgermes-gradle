@@ -23,7 +23,8 @@ class UpgradeConfigTauriConfJson {
         JsonBuilder.content.tauri.bundle.iOS = {
             developmentTeam "XRF3344MB3"
         }
-
+        JsonBuilder.content.tauri.remove('allowlist')
+        JsonBuilder.content.tauri.remove('updater')
 
 //        println generator.toJson(jsonData)
 //        println new JsonBuilder(jsonData, generator).toString()

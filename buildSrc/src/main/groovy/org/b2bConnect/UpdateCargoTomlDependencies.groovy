@@ -3,7 +3,7 @@ package org.b2bConnect
 import groovy.toml.TomlBuilder
 import groovy.toml.TomlSlurper
 
-class CargoDependenciesUpdateToml {
+class UpdateCargoTomlDependencies {
     static void main(String[] args) {
 
         def path = new ProjectDirUriGet().ProjectDirUri()

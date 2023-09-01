@@ -1,9 +1,9 @@
 package org.b2bConnect
 
-class SearchAndPasteViteConfigTs {
+class UpgradeViteConfigTs {
     static void main(String[] args) {
 
-        def One = new SearchAndPasteTextObject()
+        def One = new PasteTextObject()
 
         One.elementOfLastOccurToSearch = "import "
         One.textToAdd = "import { internalIpV4 } from 'internal-ip'\n" as String
@@ -14,7 +14,7 @@ class SearchAndPasteViteConfigTs {
 
         PasteTextBySearch.main(One)
 //----------------------------------------------------------------
-        def Two = new SearchAndPasteTextObject()
+        def Two = new PasteTextObject()
 
         Two.elementOfLastOccurToSearch = "export default defineConfig("
         Two.textToAdd = "async () => " as String
@@ -25,7 +25,7 @@ class SearchAndPasteViteConfigTs {
 
         PasteTextBySearch.main(Two)
 //----------------------------------------------------------------
-        def Three = new SearchAndPasteTextObject()
+        def Three = new PasteTextObject()
 
         Three.elementOfLastOccurToSearch = "export default defineConfig(async () => {"
         Three.textToAdd = "  const host = await internalIpV4()\n\n  return {" as String
@@ -36,7 +36,7 @@ class SearchAndPasteViteConfigTs {
 
         PasteTextBySearch.main(Three)
 //----------------------------------------------------------------
-        def Four = new SearchAndPasteTextObject()
+        def Four = new PasteTextObject()
 
         Four.elementOfLastOccurToSearch = "server: {"
         Four.textToAdd = "      host: '0.0.0.0', // listen on all addresses\n      hmr: {\n        protocol: 'ws',\n        host,\n        port: 1420,\n      }," as String
@@ -47,7 +47,7 @@ class SearchAndPasteViteConfigTs {
 
         PasteTextBySearch.main(Four)
 //----------------------Closing bracket---------------------------
-        def Five = new SearchAndPasteTextObject()
+        def Five = new PasteTextObject()
 
         Five.elementOfLastOccurToSearch = ""
         Five.textToAdd = "}\n" as String

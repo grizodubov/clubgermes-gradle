@@ -56,11 +56,11 @@ tasks.register('tauriCliUpdate', Exec) {
     commandLine "cargo", "install", "tauri-cli", "--version", "^2.0.0-alpha"
 }
 
-import org.b2bConnect.CargoDependenciesUpdateToml
+import org.b2bConnect.UpdateCargoTomlDependencies
 
 tasks.register('runCargoDependenciesUpdate') {
     group = 'tauriConf'
-    CargoDependenciesUpdateToml.main()
+    UpdateCargoTomlDependencies.main()
 }
 
 tasks.register('installNpmPackageInternalIp', Exec) {
@@ -68,23 +68,53 @@ tasks.register('installNpmPackageInternalIp', Exec) {
     commandLine "npm", "install", "--save-dev", "internal-ip"
 }
 
-
 //________________________________________________________________
 //-------------Vite.config, Tauri.conf, Rust Libs-----------------
 //----------------------------------------------------------------
-import org.b2bConnect.SearchAndPasteViteConfigTs
+import org.b2bConnect.UpgradeViteConfigTs
 
 tasks.register('runSearchAndPasteViteConfigTs') {
     group = 'tauriConf'
     dependsOn installNpmPackageInternalIp
-    SearchAndPasteViteConfigTs.main()
+    UpgradeViteConfigTs.main()
+}
+
+import org.b2bConnect.UpgradeConfigTauriConfJson
+
+tasks.register('runUpgradeConfigTauriConfJson') {
+    group = 'tauriConf'
+    UpgradeConfigTauriConfJson.main()
+}
+
+import org.b2bConnect.CreateRustLibrarySourceCode
+
+tasks.register('runCreateRustLibrarySourceCode') {
+    group = 'tauriConf'
+    CreateRustLibrarySourceCode.main()
+}
+
+//________________________________________________________________
+//---------------------------ANDROID------------------------------
+//----------------------------------------------------------------
+tasks.register('remove recent project directory', Exec) {
+    group = 'tauriAndroid'
+    commandLine "rm", "-r", "src-tauri/gen/android"
+}
+
+tasks.register('cargoTauriAndroidInit', Exec) {
+    group = 'tauriAndroid'
+    commandLine "cargo", "tauri", "android", "init"
+}
+
+import org.b2bConnect.CreateAndroidLocalProperties
+
+tasks.register('runCreateAndroidLocalProperties') {
+    group = 'tauriConf'
+    CreateAndroidLocalProperties.main()
 }
 
 
-
-import org.b2bConnect.RustLibrarySouceCodeCraate
-
-tasks.register('runRustLibrarySouceCodeCraate') {
-    group = 'tauriConf'
-    RustLibrarySouceCodeCraate.main()
+tasks.register('removeRecentProjectDirectory', Exec) {
+    group = 'tauriAndroid'
+    commandLine "cargo", "tauri", "android", "dev"
 }

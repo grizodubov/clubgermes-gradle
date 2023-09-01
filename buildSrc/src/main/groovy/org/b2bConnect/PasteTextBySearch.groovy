@@ -1,7 +1,7 @@
 package org.b2bConnect
 
 class PasteTextBySearch {
-    static void main(SearchAndPasteTextObject a) {
+    static void main(PasteTextObject a) {
 
         def newString = insertStringInIndexPlace(a)
         if (newString.length() > 0) {
@@ -17,8 +17,13 @@ class PasteTextBySearch {
 
             return indexOfLastOccurIndexEndOfString
         } else {
+            if (a.startBeforeOccurrence) {
+                return indexOfLastOccurIndex
+            } else {
 
-            return indexOfLastOccurIndex + a.elementOfLastOccurToSearch.length()
+                return indexOfLastOccurIndex + a.elementOfLastOccurToSearch.length()
+            }
+
         }
     }
 
@@ -27,7 +32,7 @@ class PasteTextBySearch {
         def inputFileText = new InputFileTextGet().inputFileText(a.fileToSearchName)
         StringBuilder sb = new StringBuilder(inputFileText)
         if (!sb.contains(a.textToAdd as String)) {
-            sb.insert(indexOfLastOccurIndexEndOfString as int, a.textToAdd as String) // to new line
+            sb.insert(indexOfLastOccurIndexEndOfString as int, a.textToAdd as String)
             if (a.startFromNewString) {
                 sb.insert(indexOfLastOccurIndexEndOfString as int, "\n" as String)
             }
