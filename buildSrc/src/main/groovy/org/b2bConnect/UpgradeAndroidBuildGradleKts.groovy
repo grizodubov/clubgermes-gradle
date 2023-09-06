@@ -1,7 +1,5 @@
 package org.b2bConnect
 
-import java.util.Scanner
-
 class UpgradeAndroidBuildGradleKts {
     static void main(String[] args) {
 
@@ -89,16 +87,17 @@ localProperties.load(FileInputStream(localPropertiesFile))\n
             def versionCode = Integer.parseInt(matcher[0][1])
 
             // prompt user for new version code
-            println("Current Android application version ${versionCode}. Increment version? y/n")
+            println("Current Android application version ${versionCode}. To increment version press 'y'.")
 //            def versionCodeIncrement = System.in.newReader().readLine()
             Scanner scanner = new Scanner(System.in)
             while (!scanner.hasNext()) {
-                Thread.sleep(100)
-            }
-            char versionCodeIncrement = scanner.next().charAt(0)
+                Thread.sleep(100) {
+                    }
+                char versionCodeIncrement = scanner.next().charAt(0)
 
-            if (versionCodeIncrement = 'y') {
-                versionCode++
+                if (versionCodeIncrement = 'y') {
+                    versionCode++
+                }
             }
             // update the version code in the file
             fileContent = fileContent.replaceFirst(/versionCode\s*=\s*\d+/, "versionCode = $versionCode")

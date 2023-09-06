@@ -16,6 +16,8 @@ dependencies {
         include 'jackson-core-2.15.2.jar'
         include 'jackson-databind-2.15.2.jar'
         include 'jackson-dataformat-toml-2.15.2.jar'
-
     }
+    implementation group: 'net.java.dev.jna', name: 'jna-platform', version: '5.13.0'
 }
+//https://discuss.gradle.org/t/how-to-include-dependencies-in-jar/19571
+//https://github.com/java-native-access/jna
