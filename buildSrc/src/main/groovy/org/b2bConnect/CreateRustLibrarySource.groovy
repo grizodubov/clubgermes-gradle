@@ -1,6 +1,6 @@
 package org.b2bConnect
 
-class CreateRustLibrarySourceCode {
+class CreateRustLibrarySource {
     static void main(String[] args) {
 
         def libRsFileText = '''

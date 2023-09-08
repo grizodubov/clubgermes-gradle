@@ -2,7 +2,7 @@ plugins {
     id 'groovy'
 }
 
-group = 'org.b2bconnect'
+group = 'org.b2bConnect'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -20,51 +20,52 @@ test {
 }
 
 tasks.register('execGitPull', Exec) {
-    group = 'tauriConf'
+    group = 'tauriGitPull'
     commandLine "git", "pull", "origin", "master"
-}
-
-import org.b2bConnect.UpgradeConfigPackageJson
-
-tasks.register('runUpgradeConfigPackageJson') {
-    group = 'tauriConf'
-    UpgradeConfigPackageJson.main()
-}
-
-tasks.register('installPackageJsonDependencies', Exec) {
-    group = 'tauriConf'
-    dependsOn runPackageJsonToMobileUpgrade
-    commandLine "npm", "install"
-}
-
-tasks.register('rustUpdate', Exec) {
-    group = 'tauriConf'
-    commandLine "rust", "update"
 }
 
 //________________________________________________________________
 //-------------------Tauri mobile configuration-------------------
 //----------------------------------------------------------------
-tasks.register('tauriAppUpdate', Exec) {
-    group = 'tauriConf'
+
+import org.b2bConnect.UpgradePackageJson
+
+tasks.register('runUpgradePackageJson') {
+    group = 'tauriNpmInstall'
+    UpgradePackageJson.main()
+}
+
+tasks.register('execInstallPackageJson', Exec) {
+    group = 'tauriNpmInstall'
+    dependsOn runPackageJsonToMobileUpgrade
+    commandLine "npm", "install"
+}
+
+tasks.register('execRustUpdate', Exec) {
+    group = 'tauriUpdatePackages'
+    commandLine "rustup", "update"
+}
+
+tasks.register('execTauriAppUpdate', Exec) {
+    group = 'tauriUpdatePackages'
     enabled = false // already exists in package.json
     commandLine "npm", "install", "@tauri-apps/api@next"
 }
 
-tasks.register('tauriCliUpdate', Exec) {
-    group = 'tauriConf'
+tasks.register('execTauriCliUpdate', Exec) {
+    group = 'tauriUpdatePackages'
     commandLine "cargo", "install", "tauri-cli", "--version", "^2.0.0-alpha"
 }
 
-import org.b2bConnect.UpdateCargoTomlDependencies
+import org.b2bConnect.UpgradeCargoToml
 
-tasks.register('runCargoDependenciesUpdate') {
-    group = 'tauriConf'
-    UpdateCargoTomlDependencies.main()
+tasks.register('runUpgradeCargoToml') {
+    group = 'tauriUpdatePackages'
+    UpgradeCargoToml.main()
 }
 
-tasks.register('installNpmPackageInternalIp', Exec) {
-    group = 'tauriConf'
+tasks.register('execInstallNpmInternalIp', Exec) {
+    group = 'tauriUpdatePackages'
     commandLine "npm", "install", "--save-dev", "internal-ip"
 }
 
@@ -73,48 +74,62 @@ tasks.register('installNpmPackageInternalIp', Exec) {
 //----------------------------------------------------------------
 import org.b2bConnect.UpgradeViteConfigTs
 
-tasks.register('runSearchAndPasteViteConfigTs') {
-    group = 'tauriConf'
+tasks.register('runUpgradeViteConfigTs') {
+    group = 'tauriUpgradeConfig'
     dependsOn installNpmPackageInternalIp
     UpgradeViteConfigTs.main()
 }
 
-import org.b2bConnect.UpgradeConfigTauriConfJson
+import org.b2bConnect.UpgradeTauriConfJson
 
-tasks.register('runUpgradeConfigTauriConfJson') {
-    group = 'tauriConf'
-    UpgradeConfigTauriConfJson.main()
+tasks.register('runUpgradeTauriConfJson') {
+    group = 'tauriUpgradeConfig'
+    UpgradeTauriConfJson.main()
 }
 
-import org.b2bConnect.CreateRustLibrarySourceCode
+import org.b2bConnect.CreateRustLibrarySource
 
-tasks.register('runCreateRustLibrarySourceCode') {
-    group = 'tauriConf'
-    CreateRustLibrarySourceCode.main()
+tasks.register('runCreateRustLibrarySource') {
+    group = 'tauriUpgradeConfig'
+    CreateRustLibrarySource.main()
 }
 
 //________________________________________________________________
 //---------------------------ANDROID------------------------------
 //----------------------------------------------------------------
-tasks.register('remove recent project directory', Exec) {
+tasks.register('execRemoveRecentProject', Exec) {
     group = 'tauriAndroid'
     commandLine "rm", "-r", "src-tauri/gen/android"
 }
 
-tasks.register('cargoTauriAndroidInit', Exec) {
+tasks.register('runCargoTauriAndroidInit', Exec) {
     group = 'tauriAndroid'
     commandLine "cargo", "tauri", "android", "init"
 }
 
-import org.b2bConnect.CreateAndroidLocalProperties
+import org.b2bConnect.CreateLocalProperties
 
-tasks.register('runCreateAndroidLocalProperties') {
-    group = 'tauriConf'
-    CreateAndroidLocalProperties.main()
+tasks.register('runCreateLocalProperties') {
+    group = 'tauriAndroid'
+    CreateLocalProperties.main()
 }
+
+import org.b2bConnect.UpgradeBuildGradleKts
+
+tasks.register('runUpgradeBuildGradleKts') {
+    group = 'tauriAndroid'
+    UpgradeBuildGradleKts.main()
+}
+
+
+
+
+
+
+
 
 
 tasks.register('removeRecentProjectDirectory', Exec) {
     group = 'tauriAndroid'
-    commandLine "cargo", "tauri", "android", "dev"
+    commandLine "cargo", "tauri", "android", "build"
 }

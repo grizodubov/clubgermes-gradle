@@ -3,7 +3,7 @@ package org.b2bConnect
 import groovy.toml.TomlBuilder
 import groovy.toml.TomlSlurper
 
-class UpdateCargoTomlDependencies {
+class UpgradeCargoToml {
     static void main(String[] args) {
 
         def path = new ProjectDirUriGet().ProjectDirUri()
@@ -11,8 +11,8 @@ class UpdateCargoTomlDependencies {
         def targetDir = "${path}src-tauri"
 
         def inputFile = new File("$fileToml")
-        def CargoDependencyTauri = new CargoDependenciesGet().CargoDependencies("tauri")
-        def CargoDependencyTauriBuild = new CargoDependenciesGet().CargoDependencies("tauri")
+        def CargoDependencyTauri = new GetDependenciesCargo().CargoDependencies("tauri")
+        def CargoDependencyTauriBuild = new GetDependenciesCargo().CargoDependencies("tauri-build")
         def slurped = new TomlSlurper().parseText(inputFile.text)
         slurped.'build-dependencies'.'tauri-build'.version = "$CargoDependencyTauriBuild"
         slurped.dependencies.tauri.version = "$CargoDependencyTauri"
@@ -23,5 +23,22 @@ class UpdateCargoTomlDependencies {
         def builder = new TomlBuilder()
         builder slurped
         new File("$targetDir/Cargo.toml").withWriter("UTF-8") { w -> builder.writeTo(w) }
+        // Create a ProcessBuilder instance
+        ProcessBuilder pb = new ProcessBuilder('cargo', 'update')
+
+        // Set the current directory to /src-tauri
+        pb.directory(new File (targetDir))
+
+        // Start the process
+        Process process = pb.start()
+
+        // Wait for the process to finish
+//        process.waitFor()
+        process.waitForProcessOutput(System.out, System.err)
+
+        // Check the exit code
+        /*if (process.exitValue() != 0) {
+            throw new ExecutionException("Cargo update failed with exit code ${process.exitValue()}")
+        }*/
     }
 }

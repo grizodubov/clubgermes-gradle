@@ -1,6 +1,6 @@
 package org.b2bConnect
 
-class CreateAndroidLocalProperties {
+class CreateLocalProperties {
     static void main(String[] args) {
         def localPropertiesFileText = '''
 ## This file must *NOT* be checked into Version Control Systems,

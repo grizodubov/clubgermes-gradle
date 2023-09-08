@@ -2,9 +2,9 @@ package org.b2bConnect
 
 import static java.util.regex.Pattern.compile
 
-class CargoDependenciesGet {
+class GetDependenciesCargo {
     static void main(String[] args) {
-        println CargoDependencies("tauri")
+
     }
 
     static CargoDependencies(String tauriComponentName) {

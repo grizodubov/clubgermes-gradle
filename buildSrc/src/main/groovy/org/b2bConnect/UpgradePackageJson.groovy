@@ -3,7 +3,7 @@ package org.b2bConnect
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 
-class UpgradeConfigPackageJson {
+class UpgradePackageJson {
     static void main(String[] args) {
 
         def path = new ProjectDirUriGet().ProjectDirUri()

@@ -1,6 +1,8 @@
 package org.b2bConnect
 
-class UpgradeAndroidBuildGradleKts {
+import java.util.concurrent.TimeUnit
+
+class UpgradeBuildGradleKts {
     static void main(String[] args) {
 
         def One = new PasteTextObject()
@@ -75,11 +77,12 @@ localProperties.load(FileInputStream(localPropertiesFile))\n
 
         PasteTextBySearch.main(Five)
 
+//----------------------------------------------------------------
+//----------------------------------------------------------------
         def fileToPasteName = '/src-tauri/gen/android/app/build.gradle.kts'
         def inputFilePath = new InputFilePathGet().inputFilePath(fileToPasteName)
         def file = new File(inputFilePath)
         def fileContent = file.text.replaceAll('isMinifyEnabled = true', 'isMinifyEnabled = false')
-
         // check if the line containing "versionCode" exists
         if (fileContent =~ /versionCode\s*=\s*\d+/) {
             // extract the current version code from the line
@@ -88,16 +91,25 @@ localProperties.load(FileInputStream(localPropertiesFile))\n
 
             // prompt user for new version code
             println("Current Android application version ${versionCode}. To increment version press 'y'.")
-//            def versionCodeIncrement = System.in.newReader().readLine()
-            Scanner scanner = new Scanner(System.in)
-            while (!scanner.hasNext()) {
-                Thread.sleep(100) {
-                    }
-                char versionCodeIncrement = scanner.next().charAt(0)
 
-                if (versionCodeIncrement = 'y') {
-                    versionCode++
-                }
+            ConsoleInput con = new ConsoleInput(
+                    Integer.parseInt("1"),
+                    Integer.parseInt("10"),
+                    TimeUnit.SECONDS
+            )
+
+            def input = con.readLine()
+            System.out.println("Done. Your input was: " + input)
+//https://www.javaspecialists.eu/archive/Issue153-Timeout-on-Console-Input.html
+
+//            Scanner scanner = new Scanner(System.in)
+//            while (!scanner.hasNext()) {
+//                Thread.sleep(100) {
+//                    }
+//                char versionCodeIncrement = scanner.next().charAt(0)
+
+            if (input == 'y') {
+                versionCode++
             }
             // update the version code in the file
             fileContent = fileContent.replaceFirst(/versionCode\s*=\s*\d+/, "versionCode = $versionCode")

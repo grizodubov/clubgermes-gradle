@@ -4,7 +4,7 @@ import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import groovy.json.StringEscapeUtils
 
-class UpgradeConfigTauriConfJson {
+class UpgradeTauriConfJson {
     static void main(String[] args) {
 
         def path = new ProjectDirUriGet().ProjectDirUri()
