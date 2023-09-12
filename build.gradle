@@ -121,12 +121,17 @@ tasks.register('runUpgradeBuildGradleKts') {
     UpgradeBuildGradleKts.main()
 }
 
+import org.b2bConnect.UpgradeAndroidResXML
 
+tasks.register('runUpgradeAndroidResXML') {
+    group = 'tauriAndroid'
+    UpgradeAndroidResXML.main()
+}
 
+tasks.register('iconsDirAndroidCopy') {
+    group = 'tauriAndroid'
 
-
-
-
+}
 
 
 tasks.register('removeRecentProjectDirectory', Exec) {
