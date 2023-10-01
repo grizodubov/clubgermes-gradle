@@ -31,6 +31,11 @@ class PasteTextBySearch {
         def indexOfLastOccurIndexEndOfString = searchLastOccurIndex(a)
         def inputFileText = new InputFileTextGet().inputFileText(a.fileToSearchName)
         StringBuilder sb = new StringBuilder(inputFileText)
+
+        def fg = 35
+        def bg = 49
+        def style = "${(char) 27}[$fg;$bg" + "m"
+
         if (!sb.contains(a.textToAdd as String)) {
             sb.insert(indexOfLastOccurIndexEndOfString as int, a.textToAdd as String)
             if (a.startFromNewString) {
@@ -38,9 +43,11 @@ class PasteTextBySearch {
             }
             def newString = sb.toString()
 
+            println(style + "$a.textToAdd\n--------------- text added to $a.fileToPasteName ---------------")
+
             return newString
         } else {
-            println "$a.textToAdd\n---------------already exists---------------"
+            println(style + "$a.textToAdd\n--------------- already exists in $a.fileToSearchName ---------------")
 
             return ""
         }

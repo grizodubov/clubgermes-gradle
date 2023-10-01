@@ -37,7 +37,7 @@ tasks.register('runUpgradePackageJson') {
 
 tasks.register('execInstallPackageJson', Exec) {
     group = 'tauriNpmInstall'
-    dependsOn runPackageJsonToMobileUpgrade
+    dependsOn runUpgradePackageJson
     commandLine "npm", "install"
 }
 
@@ -76,7 +76,7 @@ import org.b2bConnect.UpgradeViteConfigTs
 
 tasks.register('runUpgradeViteConfigTs') {
     group = 'tauriUpgradeConfig'
-    dependsOn installNpmPackageInternalIp
+    dependsOn execInstallNpmInternalIp
     UpgradeViteConfigTs.main()
 }
 
