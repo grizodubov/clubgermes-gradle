@@ -1,0 +1,71 @@
+{
+    "build": {
+        "beforeDevCommand": "npm run dev",
+        "beforeBuildCommand": "npm run build",
+        "devPath": "http://localhost:1420",
+        "distDir": "../dist",
+        "withGlobalTauri": false
+    },
+    "package": {
+        "productName": "Гермес",
+        "version": "0.0.0"
+    },
+    "tauri": {
+        "bundle": {
+            "active": true,
+            "category": "Business",
+            "copyright": "",
+            "deb": {
+                "depends": [
+                    
+                ]
+            },
+            "externalBin": [
+                
+            ],
+            "icon": [
+                "icons/32x32.png",
+                "icons/128x128.png",
+                "icons/128x128@2x.png",
+                "icons/icon.icns",
+                "icons/icon.ico"
+            ],
+            "identifier": "ru.clubgermes.social.client",
+            "longDescription": "",
+            "macOS": {
+                "entitlements": null,
+                "exceptionDomain": "",
+                "frameworks": [
+                    
+                ],
+                "providerShortName": null,
+                "signingIdentity": null
+            },
+            "iOS": {
+                "developmentTeam": "XRF3344MB3"
+            },
+            "resources": [
+                
+            ],
+            "shortDescription": "",
+            "targets": "all",
+            "windows": {
+                "certificateThumbprint": null,
+                "digestAlgorithm": "sha256",
+                "timestampUrl": ""
+            }
+        },
+        "security": {
+            "csp": null
+        },
+        "windows": [
+            {
+                "fullscreen": false,
+                "height": 600,
+                "resizable": true,
+                "title": "client",
+                "width": 800
+            }
+        ]
+    }
+}
