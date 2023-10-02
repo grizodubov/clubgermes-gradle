@@ -90,7 +90,10 @@ localProperties.load(FileInputStream(localPropertiesFile))\n
             def versionCode = Integer.parseInt(matcher[0][1])
 
             // prompt user for new version code
-            println("Current Android application version ${versionCode}. To increment version press 'y'.")
+            def fg = 30
+            def bg = 46
+            def style = "${(char) 27}[$fg;$bg" + "m"
+            println(style + "Current Android application version ${versionCode}. To increment version press 'y'.")
 
             ConsoleInput con = new ConsoleInput(
                     Integer.parseInt("1"),
@@ -99,7 +102,10 @@ localProperties.load(FileInputStream(localPropertiesFile))\n
             )
 
             def input = con.readLine()
-            System.out.println("Done. Your input was: " + input)
+            fg = 35
+            bg = 49
+            style = "${(char) 27}[$fg;$bg" + "m"
+            System.out.println(style + "Done. Your input was: " + input)
 //https://www.javaspecialists.eu/archive/Issue153-Timeout-on-Console-Input.html
 
 //            Scanner scanner = new Scanner(System.in)

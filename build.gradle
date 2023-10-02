@@ -80,11 +80,11 @@ tasks.register('runUpgradeViteConfigTs') {
     UpgradeViteConfigTs.main()
 }
 
-import org.b2bConnect.UpgradeTauriConfJson
+import org.b2bConnect.UpgradeTauriConfJsonNew
 
 tasks.register('runUpgradeTauriConfJson') {
     group = 'tauriUpgradeConfig'
-    UpgradeTauriConfJson.main()
+    UpgradeTauriConfJsonNew.main()
 }
 
 import org.b2bConnect.CreateRustLibrarySource

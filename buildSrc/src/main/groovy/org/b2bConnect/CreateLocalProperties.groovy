@@ -18,5 +18,10 @@ storeFile=/Users/valeriigrizodubov/Documents/keystores/upload-keystore
 '''
         def projectDirPath = new ProjectDirUriGet().ProjectDirUri()
         new File("$projectDirPath/src-tauri/gen/android/local.properties").withWriter { writer -> writer.write(localPropertiesFileText) }
+
+        def fg = 35
+        def bg = 49
+        def style = "${(char) 27}[$fg;$bg" + "m"
+        println(style + "File created [project]/src-tauri/gen/android/local.properties")
     }
 }

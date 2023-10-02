@@ -41,9 +41,6 @@
                 "providerShortName": null,
                 "signingIdentity": null
             },
-            "iOS": {
-                "developmentTeam": "XRF3344MB3"
-            },
             "resources": [
                 
             ],
@@ -53,6 +50,9 @@
                 "certificateThumbprint": null,
                 "digestAlgorithm": "sha256",
                 "timestampUrl": ""
+            },
+            "iOS": {
+                "developmentTeam": "XRF3344MB3"
             }
         },
         "security": {

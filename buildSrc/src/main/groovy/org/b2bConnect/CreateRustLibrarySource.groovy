@@ -64,11 +64,21 @@ fn main() {
   super::AppBuilder::new().run();
 }
 '''
+
         def projectDirPath = new ProjectDirUriGet().ProjectDirUri()
+
+        def fg = 35
+        def bg = 49
+        def style = "${(char) 27}[$fg;$bg" + "m"
+
         new File("dist").mkdir()
+        println(style + "Directory created [project]/dist")
         new File("$projectDirPath/src-tauri/src").mkdir()
-        new File("$projectDirPath/src-tauri/src/lib.rs").withWriter {writer -> writer.write(libRsFileText)}
-        new File("$projectDirPath/src-tauri/src/main.rs").withWriter {writer -> writer.write(mainRssFileText)}
-        new File("$projectDirPath/src-tauri/src/mobile.rs").withWriter {writer -> writer.write(mobileRsFileText)}
+        new File("$projectDirPath/src-tauri/src/lib.rs").withWriter { writer -> writer.write(libRsFileText) }
+        println(style + "File created [project]/src-tauri/src/lib.rs")
+        new File("$projectDirPath/src-tauri/src/main.rs").withWriter { writer -> writer.write(mainRssFileText) }
+        println(style + "File created [project]/src-tauri/src/mobile.rs")
+        new File("$projectDirPath/src-tauri/src/mobile.rs").withWriter { writer -> writer.write(mobileRsFileText) }
+        println(style + "File modified [project]/src-tauri/src/main.rs")
     }
 }

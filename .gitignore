@@ -40,3 +40,11 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/src-tauri/gen/android/app/src/main/res/values/strings.xml
+/src-tauri/src/lib.rs
+/src-tauri/src/main.rs
+/src-tauri/src/mobile.rs
+/src-tauri/Cargo.toml
+/src-tauri/tauri.conf.json
+/src-tauri/gen/android/local.properties
+/src-tauri/Cargo.lock
